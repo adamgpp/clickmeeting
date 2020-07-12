@@ -37,7 +37,8 @@ final class FileUploadService
         if (!is_dir($this->local_directory) && !file_exists($this->local_directory)) {
             mkdir($this->local_directory, 0755);
         }
-        $file = new SplFileInfo($resized_file->save($filepath));
+        $resized_file->save($filepath);
+        $file = new SplFileInfo($filepath);
         $this->upload_service_factory->getService($upload_destination)->upload($file);
         return $file;
     }
