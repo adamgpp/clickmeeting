@@ -10,7 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\FileUploadType;
 use App\Service\FileUploadService;
-use SplFileInfo;
+use App\Dictionary\FileUploadDictionary;
+use Throwable;
 
 final class FileUploadController extends AbstractController
 {
@@ -22,19 +23,28 @@ final class FileUploadController extends AbstractController
     }
 
     /**
-     * @Route("/")
+     * @Route("/", methods={"GET","POST"})
      */
     public function __invoke(Request $request): Response
     {
         $form = $this->createForm(FileUploadType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $this->file_upload_service->upload(
-                $form->get('file')->getData(),
-                (int)$form->get('destination')->getData()
-            );
-            // dd($file);
-            return $this->file($file);
+            try {
+                $destination = $form->get('destination')->getData();
+                $uploaded_file = $this->file_upload_service->upload(
+                    $form->get('file')->getData(),
+                    $destination
+                );
+                if ($destination === FileUploadDictionary::DESTINATION_LOCAL) {
+                    return $this->file($uploaded_file);
+                }
+                // show flash message @todo
+                return $this->redirect('/');
+            } catch (Throwable $e) {
+                // show flash message @todo
+                return $this->redirect('/');
+            }
         }
         return $this->render('app/file_upload.html.twig', [
             'form' => $form->createView(),

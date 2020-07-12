@@ -5,6 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "aws/aws-sdk-php": "^3.145",
         "doctrine/annotations": "^1.10",
         "gumlet/php-image-resize": "^2.0",
         "sensio/framework-extra-bundle": "^5.5",

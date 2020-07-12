@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     local_uploads_directory: 'local_uploads_directory'
+    amazon_key: ''
+    amazon_secret: ''
 
 services:
     # default configuration for services in *this* file
@@ -30,3 +32,13 @@ services:
     App\Service\FileUploadService:
         arguments:
             $local_directory: '%kernel.project_dir%/%local_uploads_directory%'
+
+    App\Service\AmazonUploadService:
+        arguments:
+            $bucket : 'demo'
+            $args:
+                credentials:
+                    key: '%amazon_key%'
+                    secret: '%amazon_secret%'
+                region: ''
+                version: ''
