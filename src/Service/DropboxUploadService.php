@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use League\Flysystem\Filesystem;
+use RuntimeException;
 use Spatie\Dropbox\Client;
 use Spatie\FlysystemDropbox\DropboxAdapter;
 
@@ -24,6 +25,9 @@ final class DropboxUploadService implements UploadServiceInterface
         $client = new Client($this->authorization_token);
         $adapter = new DropboxAdapter($client);
         $filesystem = new Filesystem($adapter, ['case_sensitive' => false]);
-        $filesystem->write($this->dropbox_uploads_directory . '/' . $file->getFilename(), file_get_contents($file->getPathname()));
+        $is_uploaded = $filesystem->write($this->dropbox_uploads_directory . '/' . $file->getFilename(), file_get_contents($file->getPathname()));
+        if (!$is_uploaded) {
+            throw new RuntimeException('Uploading a file to the Dropbox storage failed!');
+        }
     }
 }

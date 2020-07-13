@@ -34,6 +34,9 @@ final class AmazonUploadService implements UploadServiceInterface
         ]);
         $adapter = new AwsS3Adapter($client, $this->bucket);
         $filesystem = new Filesystem($adapter);
-        $filesystem->write($this->amazon_uploads_directory . '/' . $file->getFilename(), file_get_contents($file->getPathname()));
+        $is_uploaded = $filesystem->write($this->amazon_uploads_directory . '/' . $file->getFilename(), file_get_contents($file->getPathname()));
+        if (!$is_uploaded) {
+            throw new \RuntimeException('Uploading a file to the Amazon S3 storage failed!');
+        }
     }
 }

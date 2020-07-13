@@ -39,10 +39,10 @@ final class FileUploadController extends AbstractController
                 if ($destination === FileUploadDictionary::DESTINATION_LOCAL) {
                     return $this->file($uploaded_file);
                 }
-                // @todo flash message without exception content
+                // @todo flash message
                 return $this->redirect('/');
             } catch (Throwable $e) {
-                // @todo flash message without exception content
+                // @todo flash message
                 return $this->redirect('/');
             }
         }
