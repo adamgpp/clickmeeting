@@ -40,3 +40,8 @@ services:
             $region: "%env(AMAZON_REGION)%"
             $version: "%env(AMAZON_VERSION)%"
             $amazon_uploads_directory: "%env(AMAZON_UPLOADS_DIRECTORY)%"
+
+    App\Service\DropboxUploadService:
+        arguments:
+            $authorization_token: "%env(DROPBOX_AUTHORIZATION_TOKEN)%"
+            $dropbox_uploads_directory: "%env(DROPBOX_UPLOADS_DIRECTORY)%"
