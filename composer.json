@@ -8,6 +8,7 @@
         "aws/aws-sdk-php": "^3.145",
         "doctrine/annotations": "^1.10",
         "gumlet/php-image-resize": "^2.0",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/console": "5.1.*",
         "symfony/dotenv": "5.1.*",

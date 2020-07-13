@@ -9,3 +9,6 @@
 /vendor/
 /local_uploads_directory/
 ###< symfony/framework-bundle ###
+.buildpath
+.project
+.settings/org.eclipse.wst.validation.prefs

@@ -29,6 +29,12 @@
     "guzzlehttp/psr7": {
         "version": "1.6.1"
     },
+    "league/flysystem": {
+        "version": "1.0.69"
+    },
+    "league/flysystem-aws-s3-v3": {
+        "version": "1.0.25"
+    },
     "mtdowling/jmespath.php": {
         "version": "2.5.0"
     },
